@@ -27,6 +27,11 @@ public class DoubleList {
         System.out.println();
     }
 
+
+    /**
+     * apiNote добавление в начало списка
+     * @param value добавляемое значение
+     */
     public void addFirst(int value) {
         Node node = new Node();
         node.value = value;
@@ -41,6 +46,9 @@ public class DoubleList {
         }
     }
 
+    /**
+     * apiNote удаление первого элемента списка
+     */
     public void remove() {
         if (head != null && head.next != null) {
             head = head.next;
@@ -52,9 +60,9 @@ public class DoubleList {
     }
 
     /**
-     * @param value предаваемое значение
-     * @return
-     * @apiNote проверка, есть ли элемент
+     * @apiNote проверка вхождения элемента в список
+     * @param value искомое значение
+     * @return boolean
      */
     public boolean contains(int value) {
         Node currentNode = head;
@@ -67,6 +75,10 @@ public class DoubleList {
         return false;
     }
 
+    /**
+     * apiNote добавление в конец списка
+     * @param value добавляемое значение
+     */
     public void addLast(int value) {
         Node node = new Node();
         node.value = value;
@@ -80,6 +92,9 @@ public class DoubleList {
         }
     }
 
+    /**
+     * apiNote удаление последнего элемента
+     */
     public void removeLast() {
         if (tail != null && tail.previous != null) {
             tail.previous.next = null;
@@ -90,38 +105,23 @@ public class DoubleList {
         }
     }
 
-//    public void reverse() {
-//        Node currentNode = head;
-//        while (currentNode != null) {
-//            Node next = currentNode.next;
-//            Node previous = currentNode.previous;
-//            currentNode.next = previous;
-//            currentNode.previous = next;
-//            currentNode = next;
-//            if (previous == null) {
-//                tail = currentNode;
-//            }
-//            if (next == null) {
-//                head = currentNode;
-//            }
-//            currentNode = next;
-//
-//        }
-//    }
+    /**
+     * apiNote реверс списка
+     */
     public void reverse() {
-        Node node = head;
-
-        Node tmp = head;
-        head = tail;
-        tail = tmp;
-
-        while (node.next != null) {
-            tmp = node.next;
-            node.next = node.previous;
-            node.previous = tmp;
-            node = node.previous;
+        Node currentNode = head;
+        while (currentNode != null) {
+            Node next = currentNode.next;
+            Node previous = currentNode.previous;
+            currentNode.next = currentNode.previous;
+            currentNode.previous = currentNode.next;
+            if (previous == null) {
+                tail = currentNode;
+            }
+            if (next == null) {
+                head = currentNode;
+            }
+            currentNode = next;
         }
-
-
     }
 }
